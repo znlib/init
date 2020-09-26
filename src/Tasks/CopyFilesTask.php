@@ -10,7 +10,7 @@ class CopyFilesTask extends BaseTask
     public function run(array $links)
     {
         $rootPath = "$this->root/environments/{$this->env['path']}";
-        if ( ! is_dir($rootPath)) {
+        if (!is_dir($rootPath)) {
             $this->output->write("<error>$rootPath directory \"$rootPath\" does not exist.</error>");
             exit(3);
         }
@@ -26,7 +26,7 @@ class CopyFilesTask extends BaseTask
         }
         $all = false;
         foreach ($files as $file) {
-            if ( ! $this->copyFile($this->root, "environments/{$this->env['path']}/$file", $file, $all)) {
+            if (!$this->copyFile($this->root, "environments/{$this->env['path']}/$file", $file, $all)) {
                 break;
             }
         }
@@ -54,7 +54,7 @@ class CopyFilesTask extends BaseTask
 
     private function copyFile($root, $source, $target, &$all)
     {
-        if ( ! is_file($root . '/' . $source)) {
+        if (!is_file($root . '/' . $source)) {
             $this->output->write("       skip $target ($source not exist)\n");
             return true;
         }
@@ -70,13 +70,13 @@ class CopyFilesTask extends BaseTask
                 $questionText = '            ...overwrite? [Yes|No|All|Quit] ';
                 $answer = $this->params['overwrite'] ?? InputHelper::question($this->input, $this->output, $questionText);
 
-                if ( ! strncasecmp($answer, 'q', 1)) {
+                if (!strncasecmp($answer, 'q', 1)) {
                     return false;
                 } else {
-                    if ( ! strncasecmp($answer, 'y', 1)) {
+                    if (!strncasecmp($answer, 'y', 1)) {
                         $this->output->write("  overwrite $target\n");
                     } else {
-                        if ( ! strncasecmp($answer, 'a', 1)) {
+                        if (!strncasecmp($answer, 'a', 1)) {
                             $this->output->write("  overwrite $target\n");
                             $all = true;
                         } else {

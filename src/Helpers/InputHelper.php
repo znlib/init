@@ -14,7 +14,8 @@ use Symfony\Component\Console\Question\Question;
 class InputHelper
 {
 
-    public static function question(InputInterface $input, OutputInterface $output, string $questionText, string $default = ''): string {
+    public static function question(InputInterface $input, OutputInterface $output, string $questionText, string $default = ''): string
+    {
         $question = new Question($questionText, $default);
         $helperSet = self::helperSet();
         /** @var QuestionHelper $helper */
@@ -23,7 +24,8 @@ class InputHelper
         return $answer;
     }
 
-    public static function helperSet() {
+    public static function helperSet()
+    {
         return new HelperSet([
             new FormatterHelper(),
             new DebugFormatterHelper(),
