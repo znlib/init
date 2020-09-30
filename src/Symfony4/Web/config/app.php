@@ -9,10 +9,6 @@ $rootDir = realpath(__DIR__ . '/../../../../../../..');
 require_once $rootDir . '/common/Bootstrap/autoload.php';
 DotEnv::init($rootDir);
 
-if (file_exists($rootDir . '/common/runtime/init.lock')) {
-    exit('Already installed!');
-}
-
 $container = Container::getInstance();
 
 $app = new MicroApp($container);

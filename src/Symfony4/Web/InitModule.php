@@ -5,20 +5,26 @@ namespace ZnLib\Init\Symfony4\Web;
 use Illuminate\Container\Container;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
+use ZnLib\Init\Domain\Interfaces\Repositories\LockerRepositoryInterface;
+use ZnLib\Init\Domain\Interfaces\Repositories\RequirementRepositoryInterface;
+use ZnLib\Init\Domain\Repositories\File\LockerRepository;
+use ZnLib\Init\Domain\Repositories\File\RequirementRepository;
 use ZnLib\Init\Symfony4\Web\Controllers\InitController;
 use ZnLib\Web\Symfony4\MicroApp\BaseModule;
 
 class InitModule extends BaseModule
 {
 
-    public function configContainer(Container $container) {
+    public function configContainer(Container $container)
+    {
+        require_once __DIR__ . '/../../../../../../vendor/yiisoft/yii2/requirements/YiiRequirementChecker.php';
+        $container->bind(LockerRepositoryInterface::class, LockerRepository::class);
+        $container->bind(RequirementRepositoryInterface::class, RequirementRepository::class);
         $container->bind(FileRepository::class, function () {
-            $eloquentConfigFile = $_ENV['ELOQUENT_CONFIG_FILE'];
-            return new FileRepository($eloquentConfigFile);
+            return new FileRepository($_ENV['ELOQUENT_CONFIG_FILE']);
         });
         $container->bind(SourceRepository::class, function () {
-            $eloquentConfigFile = $_ENV['ELOQUENT_CONFIG_FILE'];
-            return new SourceRepository($eloquentConfigFile);
+            return new SourceRepository($_ENV['ELOQUENT_CONFIG_FILE']);
         });
     }
 
