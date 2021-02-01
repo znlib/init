@@ -3,18 +3,15 @@
 namespace ZnLib\Init\Domain\Entities;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 
-class LockerEntity implements ValidateEntityInterface
+class LockerEntity implements ValidateEntityByMetadataInterface
 {
 
-    public function validationRules()
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        return [
 
-        ];
     }
 
-
 }
-

@@ -3,9 +3,10 @@
 namespace ZnLib\Init\Domain\Entities;
 
 use Symfony\Component\Validator\Constraints as Assert;
-use ZnCore\Domain\Interfaces\Entity\ValidateEntityInterface;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use ZnCore\Domain\Interfaces\Entity\ValidateEntityByMetadataInterface;
 
-class RequirementEntity implements ValidateEntityInterface
+class RequirementEntity implements ValidateEntityByMetadataInterface
 {
 
     private $name = null;
@@ -18,25 +19,13 @@ class RequirementEntity implements ValidateEntityInterface
 
     private $memo = null;
 
-    public function validationRules()
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
     {
-        return [
-            'name' => [
-                new Assert\NotBlank,
-            ],
-            'mandatory' => [
-                new Assert\NotBlank,
-            ],
-            'condition' => [
-                new Assert\NotBlank,
-            ],
-            'by' => [
-                new Assert\NotBlank,
-            ],
-            'memo' => [
-                new Assert\NotBlank,
-            ],
-        ];
+        $metadata->addPropertyConstraint('name', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('mandatory', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('condition', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('by', new Assert\NotBlank);
+        $metadata->addPropertyConstraint('memo', new Assert\NotBlank);
     }
 
     public function setName($value) : void
