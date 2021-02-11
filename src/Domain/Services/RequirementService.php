@@ -15,13 +15,13 @@ class RequirementService extends BaseService implements RequirementServiceInterf
 
     public function __construct(RequirementRepositoryInterface $repository, YiiRequirementChecker $requirementChecker)
     {
-        $this->repository = $repository;
+        $this->setRepository($repository);
         $this->requirementChecker = $requirementChecker;
     }
 
     public function checkRequirements(): array
     {
-        $requirements = $this->repository->all();
+        $requirements = $this->getRepository()->all();
         $result = RequirementHelper::check($requirements);
         return $result;
     }

@@ -11,17 +11,17 @@ class LockerService extends BaseService implements LockerServiceInterface
 
     public function __construct(LockerRepositoryInterface $repository)
     {
-        $this->repository = $repository;
+        $this->setRepository($repository);
     }
 
     public function lock()
     {
-        $this->repository->lock();
+        $this->getRepository()->lock();
     }
 
     public function checkLocker()
     {
-        if ($this->repository->isLocked()) {
+        if ($this->getRepository()->isLocked()) {
             exit('Already installed!');
         }
     }
