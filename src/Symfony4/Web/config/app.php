@@ -7,7 +7,7 @@ use ZnLib\Web\Symfony4\MicroApp\MicroApp;
 use ZnCore\Base\Helpers\EnvHelper;
 
 $rootDir = realpath(__DIR__ . '/../../../../../../..');
-require_once $rootDir . '/common/Bootstrap/autoload.php';
+require_once $rootDir . '/vendor/autoload.php';
 DotEnv::init($rootDir);
 
 $container = Container::getInstance();
